@@ -1,0 +1,4 @@
+- source: time-travel.qmd
+  quarto-pub:
+    - id: 8adc9bba-50bf-4b4d-a300-d38fe98d3417
+      url: 'https://quartopub.com/sites/mattkumar/time-travel'

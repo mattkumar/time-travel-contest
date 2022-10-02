@@ -1,0 +1,88 @@
+/*-- scss:rules --*/
+/* Digital Clock Font */
+@font-face {
+    font-family: 'alarm clock';
+    font-style: normal;
+    font-weight: 400;
+    src: local('alarm clock'), url('alarm clock.woff') format('woff');
+}
+
+/* Labeller Font */
+@font-face {
+    font-family: 'Impact Label';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Impact Label'), url('Impact_label.woff') format('woff');
+}
+
+/* Styling for <mark></mark> components */
+.base-mark {
+  background-color: #000000; 
+  font-family: 'alarm clock', sans-serif;
+  font-size: 60px;
+  text-align: center;
+}
+
+.mark-1 {
+  @extend .base-mark;
+  color: #FF3131;
+}
+
+.mark-2 {
+  @extend .base-mark;
+  color: #39FF14;
+}
+
+.mark-3 {
+  @extend .base-mark;
+  color: #FFFF33;
+}
+
+/* Styling for AM/PM column */
+.ampm {
+  font-family: 'Impact Label', sans-serif; 
+  font-size: 15px; 
+  color: #800000;
+}
+
+/* Styling for indicators - used in columns AMPM and COLON */
+.base-indicator {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border:1px solid #000000;
+  display: inline-block;
+}
+
+.blink {
+  @extend .base-indicator;
+  background-color: #FFFF33;
+  animation: blink 0.2s infinite alternate;
+}
+
+.on {
+  @extend .base-indicator;
+  background-color: #FFFF33;
+}
+
+.off {
+  @extend .base-indicator;
+  background-color: #BBB;
+}
+
+@keyframes blink {
+    from {opacity:0;}
+    to {opacity: 1;}
+}
+
+/* Background gradient for all reactables */
+.rt-th-inner, .rt-td-inner {
+   background-image: linear-gradient(white, silver);
+}
+
+/* General styling of page */
+body {
+ background-color: hsl(233, 9%, 19%);
+ color: #D69F4C;
+ zoom: 125%;
+}

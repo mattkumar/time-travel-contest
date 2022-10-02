@@ -1,0 +1,116 @@
+---
+title: ""
+execute: 
+  echo: false
+  warning: false
+  message: false
+format: html
+theme: custom.scss
+---
+
+```{r}
+# libs
+library(tidyverse)
+library(reactable)
+library(reactablefmtr)
+library(countup)
+library(htmltools)
+
+# data
+data <- data.frame(
+  MONTH = rep("OCT", 3),
+  DAY = 26,
+  YEAR = 1985,
+  AMPM = NA,
+  HOUR = 10,
+  COLON = NA,
+  MIN = c(21, 22, 20)
+)
+
+# countup options
+opts <- list(
+  useEasing = TRUE,
+  useGrouping = TRUE,
+  separator = ""
+)
+
+# generic table function
+sub_table <- function(data, mark_class, footer_text) {
+  reactable(data,
+    sortable = FALSE,
+    compact = TRUE,
+    bordered = FALSE,
+    defaultColDef = colDef(
+      headerStyle = list(
+        fontFamily = "Impact Label, sans-serif",
+        color = "#800000",
+        fontSize = "30px"
+      ),
+      align = "center",
+      cell = function(value) {
+        if (is.character(value)) {
+          content <- value
+        } else {
+          content <- countup::countup(value, duration = 12, options = opts)
+        }
+        tags$mark(
+          class = mark_class,
+          content
+        )
+      }
+    ),
+    columns = list(
+      YEAR = colDef(
+        format = colFormat(separators = FALSE),
+        footer = footer_text,
+        footerStyle = list(
+          fontFamily = "Impact Label, sans-serif",
+          color = "#1A0076",
+          fontSize = "20px"
+        ),
+        width = 250
+      ),
+      AMPM = colDef(
+        name = "",
+        width = 50,
+        cell = function(value) {
+          div(
+            div(class = "ampm", "AM"),
+            span(class = "blink"),
+            div(class = "ampm", "PM"),
+            span(class = "off")
+          )
+        }
+      ),
+      COLON = colDef(
+        name = "",
+        width = 25,
+        cell = function(value) {
+          div(
+            style = "padding-top: 15px;",
+            div(span(class = "on")),
+            div(span(class = "on"))
+          )
+        }
+      )
+    )
+  )
+}
+
+```
+
+
+```{r}
+# run the tables
+data %>%
+  filter(row_number() == 1) %>%
+  sub_table(mark_class = "mark-1", footer_text = "DESTINATION TIME")
+
+data %>%
+  filter(row_number() == 2) %>%
+  sub_table(mark_class = "mark-2", footer_text = "PRESENT TIME")
+
+data %>%
+  filter(row_number() == 3) %>%
+  sub_table(mark_class = "mark-3", footer_text = "LAST TIME DEPARTED")
+```
