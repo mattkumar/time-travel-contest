@@ -14,8 +14,9 @@ theme: custom.scss
 library(tidyverse)
 library(reactable)
 library(reactablefmtr)
-library(countup)
 library(htmltools)
+#remotes::install_github("JohnCoene/countup")
+library(countup)
 
 # data
 data <- data.frame(
@@ -100,8 +101,24 @@ sub_table <- function(data, mark_class, footer_text, time_delay) {
 
 ```
 
- 
-## Original
+## About
+
+This table is a recreation of the time travel device seen in the movie [Back to the Future](https://www.imdb.com/title/tt0088763/). It uses a combination of scss and {reactable} to stylize and display the table. The {countup} package by [John Coene](https://john-coene.com/) is integrated into the body of the table to give the illusion of the machine calibrating.
+
+<strong>Note:</strong> If you miss the counter animation due to reading this, simply refresh the page
+
+## Approach
+
+I've provided two views of the table: the first is the original (flat) view, the second is meant to be look like a real machine by adding some perspective (i.e. 3d).
+
+::: {layout-ncol=2}
+
+![Flat](https://images.squarespace-cdn.com/content/v1/545f5b33e4b0719cb5aee3a5/1606653495764-HE8UCUWTBZR2M4IWXOLA/Screen+Shot+2020-11-29+at+12.36.14.png)
+
+![3D](https://www.rookscastle.com/tutorials/bttf-int-016-1.jpg)
+:::
+
+## Flat Style Recreation
 ```{r}
 # run the tables
 tags$div(
@@ -118,7 +135,7 @@ tags$div(
 )
 ```
 
-## 3D Table
+## 3D Style Recreation
 ```{r}
 # run the tables
 tags$div(
