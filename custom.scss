@@ -15,6 +15,10 @@
     src: local('Impact Label'), url('Impact_label.woff') format('woff');
 }
 
+/* Font to be used for plain text of the .qmd */
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap');
+
+
 /* Styling for <mark></mark> components */
 .base-mark {
   background-color: #000000; 
@@ -84,4 +88,44 @@
 body {
  background-color: hsl(233, 9%, 19%);
  color: #D69F4C;
+ font-family: 'Inconsolata', monospace;
+}
+
+/* Additional formatting of h1 */
+h1 {
+ text-align: center;
+ font-family: 'alarm clock', sans-serif;
+}
+
+/* Formatting of meta contents */
+.quarto-title-meta-contents > p{
+   font-family: 'alarm clock', sans-serif;
+}
+
+/* 3d effect */
+#box3d {
+ transform: skewY(20deg) scale(0.5);
+ box-shadow: black 0px 0px 0px 2px inset, 
+             silver 10px -10px 0px -4px, 
+             black 10px -10px, 
+             silver 20px -20px 0px -4px, 
+             black 20px -20px, 
+             silver 30px -30px 0px -4px, 
+             black 30px -30px, 
+             silver 40px -40px 0px -4px, 
+             black 40px -40px,
+             silver 50px -50px 0px -4px, 
+             black 50px -50px,
+             silver 60px -60px 0px -4px, 
+             black 60px -60px,
+             silver 70px -70px 0px -4px, 
+             black 70px -70px,
+             silver 80px -80px 0px -4px, 
+             black 80px -80px,
+             silver 90px -90px 0px -4px, 
+             black 90px -90px,
+             silver 100px -100px 0px -4px, 
+             black 100px -100px,
+             silver 110px -110px 0px -4px, 
+             black 110px -110px;
 }

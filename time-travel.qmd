@@ -1,5 +1,6 @@
 ---
-title: ""
+title: "Time Travel Machine"
+author: "Matthew Kumar"
 execute: 
   echo: false
   warning: false
@@ -99,18 +100,37 @@ sub_table <- function(data, mark_class, footer_text, time_delay) {
 
 ```
 
-
+ 
+## Original
 ```{r}
 # run the tables
-data %>%
-  filter(row_number() == 1) %>%
-  sub_table(mark_class = "mark-1", footer_text = "DESTINATION TIME", time_delay = 4)
+tags$div(
+  id = "original",
+  data %>%
+    filter(row_number() == 1) %>%
+    sub_table(mark_class = "mark-1", footer_text = "DESTINATION TIME", time_delay = 4),
+  data %>%
+    filter(row_number() == 2) %>%
+    sub_table(mark_class = "mark-2", footer_text = "PRESENT TIME", time_delay = 6),
+  data %>%
+    filter(row_number() == 3) %>%
+    sub_table(mark_class = "mark-3", footer_text = "LAST TIME DEPARTED", time_delay = 8)
+)
+```
 
-data %>%
-  filter(row_number() == 2) %>%
-  sub_table(mark_class = "mark-2", footer_text = "PRESENT TIME", time_delay = 6)
-
-data %>%
-  filter(row_number() == 3) %>%
-  sub_table(mark_class = "mark-3", footer_text = "LAST TIME DEPARTED", time_delay = 8)
+## 3D Table
+```{r}
+# run the tables
+tags$div(
+  id = "box3d",
+  data %>%
+    filter(row_number() == 1) %>%
+    sub_table(mark_class = "mark-1", footer_text = "DESTINATION TIME", time_delay = 4),
+  data %>%
+    filter(row_number() == 2) %>%
+    sub_table(mark_class = "mark-2", footer_text = "PRESENT TIME", time_delay = 6),
+  data %>%
+    filter(row_number() == 3) %>%
+    sub_table(mark_class = "mark-3", footer_text = "LAST TIME DEPARTED", time_delay = 8)
+)
 ```
