@@ -84,27 +84,9 @@
    background-image: linear-gradient(white, silver);
 }
 
-/* General styling of page */
-body {
- background-color: hsl(233, 9%, 19%);
- color: #D69F4C;
- font-family: 'Inconsolata', monospace;
-}
-
-/* Additional formatting of h1 */
-h1 {
- text-align: center;
- font-family: 'alarm clock', sans-serif;
-}
-
-/* Formatting of meta contents */
-.quarto-title-meta-contents > p{
-   font-family: 'alarm clock', sans-serif;
-}
-
 /* 3d effect */
 #box3d {
- transform: skewY(20deg) scale(0.5);
+ transform: skewY(15deg) scale(0.5);
  box-shadow: black 0px 0px 0px 2px inset, 
              silver 10px -10px 0px -4px, 
              black 10px -10px, 
@@ -114,7 +96,7 @@ h1 {
              black 30px -30px, 
              silver 40px -40px 0px -4px, 
              black 40px -40px,
-             silver 50px -50px 0px -4px, 
+             #39FF14 50px -50px 250px -4px, 
              black 50px -50px,
              silver 60px -60px 0px -4px, 
              black 60px -60px,
@@ -124,8 +106,49 @@ h1 {
              black 80px -80px,
              silver 90px -90px 0px -4px, 
              black 90px -90px,
-             silver 100px -100px 0px -4px, 
+             #39FF14 100px -100px 90px -4px, 
              black 100px -100px,
              silver 110px -110px 0px -4px, 
-             black 110px -110px;
+             black 110px -110px,
+             silver 120px -120px 0px -4px, 
+             black 120px -120px,
+             silver 130px -130px 0px -4px, 
+             black 130px -130px,
+             silver 140px -140px 0px -4px, 
+             black 140px -140px,
+             #39FF14 150px -150px 50px -4px, 
+             black 150px -150px,
+             silver 160px -160px 0px -4px, 
+             black 160px -160px,
+             silver 170px -170px 0px -4px, 
+             black 170px -170px,
+             silver 180px -180px 0px -4px, 
+             black 180px -180px,
+             silver 190px -190px 0px -4px, 
+             black 190px -190px,
+             #39FF14 200px -200px 90px -4px, 
+             black 200px -200px,
+             silver 210px -210px 0px -4px, 
+             black 210px -210px;
+}
+
+
+/* General styling of page */
+body {
+ background-color: hsl(233, 9%, 19%);
+ color: #D69F4C;
+ font-family: 'Inconsolata', monospace;
+}
+
+.figure-caption {
+ color: #D69F4C !important;
+}
+
+h1 {
+ text-align: center;
+ font-family: 'alarm clock', sans-serif;
+}
+
+.quarto-title-meta-contents > p{
+   font-family: 'alarm clock', sans-serif;
 }
