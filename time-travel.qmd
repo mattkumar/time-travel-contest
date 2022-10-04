@@ -53,7 +53,7 @@ sub_table <- function(data, mark_class, footer_text, time_delay) {
         if (is.character(value)) {
           content <- value
         } else {
-          content <- countup::countup(options = opts,value, duration = time_delay)
+          content <- countup::countup(options = opts, value, duration = time_delay)
         }
         tags$mark(
           class = mark_class,
