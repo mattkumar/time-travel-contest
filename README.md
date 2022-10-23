@@ -11,7 +11,7 @@ My aims for this project were two-fold:
 
 1. To think about creative uses of tables! 
 
-2. Investigate and experiment with some of the advanced features of (s)css and Quarto.
+2. Continue to investigate and experiment with reactable, scss and Quarto.
 
 ## Features
 I attempt to recreate the time machine gizmo by using a variety of scss styling and html elements. Additionally, I aim for a 3D perspective view of the table by giving it "depth". In each case, I use the countup package to simulate the time machine calibrating.

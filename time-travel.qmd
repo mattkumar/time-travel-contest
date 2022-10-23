@@ -18,30 +18,34 @@ library(htmltools)
 #remotes::install_github("JohnCoene/countup")
 library(countup)
 
-# data
-data <- data.frame(
-  MONTH = rep("OCT", 3),
-  DAY = 26,
-  YEAR = 1985,
-  AMPM = NA,
-  HOUR = 10,
-  COLON = NA,
-  MIN = c(21, 22, 20)
-)
+# Data 
+# Three rows of data, each to be displayed in their own table
+# Ultimately, they will appear as if they are a single table
+# Columns AMPM and COLON are left as NA (i.e. placeholders) - to be populated in reactable
+data <- tibble::tribble(
+  ~MONTH, ~DAY, ~YEAR, ~AMPM, ~HOUR, ~COLON, ~MIN,
+   "OCT",   26,  1985,    NA,    10,     NA,   21,
+   "OCT",   26,  1985,    NA,    10,     NA,   22,
+   "OCT",   26,  1985,    NA,    10,     NA,   20
+  )
 
-# countup options
+# Countup options
 opts <- list(
   useEasing = TRUE,
   useGrouping = TRUE,
   separator = ""
 )
 
-# generic table function
+# This table function will be called for each row of data 
+# -mark_class: a custom css class to be called for <mark></mark> elements I've defined in custom.scss
+# -footer_text: the text that goes into the footer for each table - ultimately appears in the YEAR column
+# -time_delay: a parameter that controls the duration of countup::countup()
 sub_table <- function(data, mark_class, footer_text, time_delay) {
   reactable(data,
     sortable = FALSE,
     compact = TRUE,
     bordered = FALSE,
+    # Defaults for each column
     defaultColDef = colDef(
       headerStyle = list(
         fontFamily = "Impact Label, sans-serif",
@@ -49,18 +53,23 @@ sub_table <- function(data, mark_class, footer_text, time_delay) {
         fontSize = "30px"
       ),
       align = "center",
+      # Default cell rendering for each column
+      # Apply countup::countup() on all columns in the table but character ones (i.e MONTH)
       cell = function(value) {
         if (is.character(value)) {
           content <- value
         } else {
           content <- countup::countup(options = opts, value, duration = time_delay)
         }
+        # mark_class is used here
         tags$mark(
           class = mark_class,
           content
         )
       }
     ),
+    # Column specific formatting
+    # I choose to place the footer of each table in the YEAR column (appears centered given css/formatting/etc)
     columns = list(
       YEAR = colDef(
         format = colFormat(separators = FALSE),
@@ -72,6 +81,7 @@ sub_table <- function(data, mark_class, footer_text, time_delay) {
         ),
         width = 250
       ),
+      # AMPM placeholder is populated here
       AMPM = colDef(
         name = "",
         width = 50,
@@ -84,6 +94,7 @@ sub_table <- function(data, mark_class, footer_text, time_delay) {
           )
         }
       ),
+      # COLON placeholder is populated here
       COLON = colDef(
         name = "",
         width = 25,
@@ -103,25 +114,32 @@ sub_table <- function(data, mark_class, footer_text, time_delay) {
 
 ## About
 
-This table is a recreation of the time travel device seen in the movie [Back to the Future](https://www.imdb.com/title/tt0088763/). It uses a combination of scss and {reactable} to stylize and display the table. The {countup} package by [John Coene](https://john-coene.com/) is integrated into the body of the table to give the illusion of the machine calibrating.
+This table is a recreation of the time travel device seen in the movie [Back to the Future](https://www.imdb.com/title/tt0088763/). It uses a combination of scss and {reactable} to stylize and display the table. 
+
+The {countup} package by [John Coene](https://john-coene.com/) is integrated into the body of the table to give the illusion of the machine calibrating.
 
 <strong>Note:</strong> If you miss the counter animation due to reading this, simply refresh the page
 
 ## Approach
 
-I've provided two views of the table: the first is the original (flat) view, the second is meant to be look like a real machine by adding some perspective (i.e. 3d).
+I've provided two views of the table: the first is the original (flat) view, the second is meant to be look like a real machine by adding some perspective (i.e. 3d). Both retain the illusion of the machine calibrating!
 
 ## Flat View
 ```{r}
-# run the tables
+# Execute tables
+# recall: each row requires it's own table
+# time_delay are offset by 6 seconds for each table so it gives a calibration effect
 tags$div(
   id = "original",
+  
   data %>%
     filter(row_number() == 1) %>%
     sub_table(mark_class = "mark-1", footer_text = "DESTINATION TIME", time_delay = 6),
+  
   data %>%
     filter(row_number() == 2) %>%
     sub_table(mark_class = "mark-2", footer_text = "PRESENT TIME", time_delay = 12),
+  
   data %>%
     filter(row_number() == 3) %>%
     sub_table(mark_class = "mark-3", footer_text = "LAST TIME DEPARTED", time_delay = 18)
@@ -134,15 +152,19 @@ tags$div(
 
 ## 3D View
 ```{r}
-# run the 3d tables
+# Execute the 3d tables
+# Same approach as above, but using a custom css for #box3d, defined in custom.scss
 tags$div(
   id = "box3d", 
+  
   data %>%
     filter(row_number() == 1) %>%
     sub_table(mark_class = "mark-1", footer_text = "DESTINATION TIME", time_delay = 6),
+  
   data %>%
     filter(row_number() == 2) %>%
     sub_table(mark_class = "mark-2", footer_text = "PRESENT TIME", time_delay = 12),
+  
   data %>%
     filter(row_number() == 3) %>%
     sub_table(mark_class = "mark-3", footer_text = "LAST TIME DEPARTED", time_delay = 18)
